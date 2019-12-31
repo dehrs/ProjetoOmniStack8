@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import "./Main.css";
 
 import api from "../services/api";
@@ -11,6 +12,7 @@ import dislike from "../assets/dislike.svg";
 import itsamatch from "../assets/itsamatch.png";
 
 export default function Main({ match }) {
+  const nameUser = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
 
@@ -54,13 +56,14 @@ export default function Main({ match }) {
   return (
     <>
       <Navbar bg="dark" variant="dark" fixed="top">
-        <Navbar.Brand href="/">
-          <img alt="Tindev" src={logo} className="d-inline-block align-top" />
-          {""}
-        
-        </Navbar.Brand>
+        <Navbar.Collapse className="justify-content-center">
+          <Link to="/">
+            <img alt="Tindev" src={logo} className="d-inline-block align-top" />
+          </Link>
+        </Navbar.Collapse>
       </Navbar>
       <div className="main-container">
+        {nameUser && <div className="saudacao">Olá, {nameUser}!</div>}
         {users.length > 0 ? (
           <ul>
             {users.map(user => (

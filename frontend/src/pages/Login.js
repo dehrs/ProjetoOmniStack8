@@ -15,6 +15,8 @@ export default function Login({ history }) {
 
     const { _id } = response.data;
 
+    localStorage.setItem("user", JSON.stringify(response.data.name));
+
     history.push(`/dev/${_id}`);
   }
 
